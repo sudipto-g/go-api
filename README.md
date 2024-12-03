@@ -1,4 +1,3 @@
-```markdown
 # Simple Go API - User Info Service
 
 This is a simple Go-based API that listens on `localhost:8000` and responds to GET requests. The API retrieves the `userid` and their `birthdate` from a mock database. Access to the API is secured using an authorization token, which must be provided in the request header.
@@ -111,9 +110,8 @@ A mock database call (a golang map) is used to simulate retrieving user data. Th
 
 ---
 
-Feel free to modify and expand this basic API as per your requirements. If you encounter any issues, feel free to open an issue on the repository.
+Feel free to modify and expand this basic API as per your requirements. If you encounter any issues, feel free to open an issue on the repository.  
 
-```
 
 ### Explanation of the contents:
 1. **Features and API Endpoints**: Describes what the API does and outlines the specific `GET /user` endpoint.
