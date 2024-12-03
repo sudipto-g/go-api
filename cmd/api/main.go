@@ -14,7 +14,7 @@ func main() {
 	var r *chi.Mux = chi.NewRouter()
 	handlers.Handler(r)
 	fmt.Println("Starting GO API Service")
-	err := http.ListenAndServe("localhost:4000", r)
+	err := http.ListenAndServe("localhost:8000", r)
 	if err != nil {
 		log.Error(err)
 	}

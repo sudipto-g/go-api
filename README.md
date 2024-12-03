@@ -1,23 +1,22 @@
 # Simple Go API - User Info Service
 
-This is a simple Go-based API that listens on `localhost:8000` and responds to GET requests. The API retrieves the `userid` and their `birthdate` from a mock database. Access to the API is secured using an authorization token, which must be provided in the request header.
+This is a simple Go-based API that listens on `localhost:8000` and responds to GET requests. The API retrieves a user's birthdate based on their `userid` from a mock database. Access to the API is secured using an authorization token, which must be provided in the request header.
 
 ## Features
 - Exposes a simple GET endpoint that returns user data (user ID and birthdate).
 - Authenticated by an authorization token sent via request headers.
-- Mock database used to store user information.
 - Written in Go (Golang).
 
-## API Endpoints
+## API Endpoint
 
-### `http://localhost:8000/account/dob/?username=sudo`
+### `/account/dob/`
 
 Returns user information (birthdate) for the authorized user.
 
 #### Request:
 
 ```http
-GET http://localhost:4000/account/dob/?username=sudipto
+GET http://localhost:8000/account/dob/?username=<username>
 Authorization: <auth_token>
 ```
 
@@ -25,7 +24,7 @@ Authorization: <auth_token>
 
 ```json
 {  
-    "Date": "08-12-2000",  
+    "Date": "<DOB>",  
     "Code": 200  
 }  
 ```
@@ -34,7 +33,7 @@ Authorization: <auth_token>
 - `200 OK`: Successfully retrieved user data.  
 - `400 BadRequest`: Invalid user or token.  
 
-## Authentication
+## Authorization
 
 The API requires a valid authorization token in the `Authorization` header. The format of the token should be:
 
@@ -43,8 +42,8 @@ Authorization: <auth_token>
 ```
 
 For testing purposes, the token should be one of the following:
-- `valid_token_1`: Returns user ID `12345` and birthdate `1990-01-01`
-- `valid_token_2`: Returns user ID `67890` and birthdate `1985-05-15`
+- `123sudo`: Returns birthdate `08-12-2000` for user ID `sudipto`  
+- `456harsha`: Returns birthdate `23-11-1997` for user ID `harshada`  
 
 Any other token (or missing token) will result in a `400 BadRequest` response.
 
@@ -81,12 +80,12 @@ A mock database call (a golang map) is used to simulate retrieving user data. Th
 
 3. The server will start and listen on `http://localhost:8000`.
 
-4. You can test the API with a valid authorization token using `curl` or Postman:
+4. You can test the API with a valid authorization token using `curl` or `Postman`:
 
    **Example using curl:**
 
    ```bash
-   curl -H "Authorization:<authtoken>" 'http://localhost:4000/account/dob/?username=<username>'
+   curl -H "Authorization:<authtoken>" 'http://localhost:8000/account/dob/?username=<username>'
    ```
 
    **Response:**
@@ -94,18 +93,32 @@ A mock database call (a golang map) is used to simulate retrieving user data. Th
    ```json
    {
      "Date": "<date_of_birth>",
-     "Code": <code>,
+     "Code": 200,
    }
    ```
 
 ## Directory Structure
 
 ```
-/go-user-api
-  ├── main.go          # Main application code
-  ├── mockdb.go        # Simulated database and user retrieval logic
-  ├── handlers.go      # Request handler functions
-  └── README.md        # This file
+.
+├── README.md
+├── api
+│   └── api.go
+├── cmd
+│   └── api
+│       └── main.go
+├── go.mod
+├── go.sum
+└── internal
+    ├── handlers
+    │   ├── api.go
+    │   └── get_dob.go
+    ├── middleware
+    │   └── authorization.go
+    └── tools
+        ├── db.go
+        └── mockdb.go
+
 ```
 
 ---
@@ -114,7 +127,7 @@ Feel free to modify and expand this basic API as per your requirements. If you e
 
 
 ### Explanation of the contents:
-1. **Features and API Endpoints**: Describes what the API does and outlines the specific `GET /user` endpoint.
+1. **Features and API Endpoints**: Describes what the API does and outlines the specific `GET /account/dob` endpoint.
 2. **Authentication**: Explains how to pass the authorization token for accessing the API.
 3. **Mock Database**: Simulates a database for user data and lists sample tokens and associated data.
 4. **How to Run**: Provides clear steps for setting up and running the API on a local machine.
