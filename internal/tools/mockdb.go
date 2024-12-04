@@ -1,5 +1,9 @@
 package tools
 
+import (
+	log "github.com/sirupsen/logrus"
+)
+
 type mockDB struct{}
 
 var mockLoginDetails = map[string]LoginDetails{
@@ -44,4 +48,14 @@ func (d *mockDB) GetUserDoB(username string) *DoBDetails {
 
 func (d *mockDB) SetupDB() error {
 	return nil //mock call
+}
+
+func NewDB() (*DBInterface, error) {
+	var db DBInterface = &mockDB{}
+	var err error = db.SetupDB()
+	if err != nil {
+		log.Error(err)
+		return nil, err
+	}
+	return &db, nil
 }
