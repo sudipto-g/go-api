@@ -65,7 +65,7 @@ A mock database call (a golang map) is used to simulate retrieving user data. Th
 
 ### Steps to Run the API Server
 
-1. Clone this repository to your local machine.
+1. Clone the repository.
 
    ```bash
    git clone https://github.com/sudipto-g/go-api.git
@@ -123,12 +123,10 @@ A mock database call (a golang map) is used to simulate retrieving user data. Th
 
 ---
 
-Feel free to modify and expand this basic API as per your requirements. If you encounter any issues, feel free to open an issue on the repository.  
-
 
 ### Explanation of the contents:
 1. **Features and API Endpoints**: Describes what the API does and outlines the specific `GET /account/dob` endpoint.
-2. **Authentication**: Explains how to pass the authorization token for accessing the API.
+2. **Authorization**: Explains how to pass the authorization token for accessing the API.
 3. **Mock Database**: Simulates a database for user data and lists sample tokens and associated data.
 4. **How to Run**: Provides clear steps for setting up and running the API on a local machine.
 5. **Directory Structure**: A simple structure for the Go project files.
